@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/jquery-3.2.0.min.js"></script>
+<script>
+	$(document).ready(function() {
+		var requestDto = {name : 'Chen', gender : 'M'};
+		var json = JSON.stringify(requestDto);// Stringify the DTO.
+		$.ajax({ 
+		    url : 'http://localhost:8080/post',    
+		    type : 'POST',// This attribute is GET by default.
+		    contentType : 'application/json;charset=utf-8',// The default option is "application/x-www-form-urlencoded;charset=UTF-8"
+		    data : json,// It is converted to a query string, if not already a string. It's appended to the url for GET-requests.
+		    async : true,// Enabling the asynchronous mechamism is appreciated since the call back function will take care of the response. This attribute is true by default. 
+		    cache : true,// Requested pages will be cached by the browser.          
+		    processData : false,// Avoids making a query string.
+		    beforeSend : function() {
+		    	alert('Ready to Send the DTO');
+		    }, 
+		    success : function(responseDto) {
+		        alert('Name = ' + responseDto.name);
+		        alert('Gender = ' + responseDto.gender);
+		    }, 
+		    error : function() {
+		    	alert('An error has occured.');
+		    },
+		    complete : function() {
+		    	alert('The request is finished.');
+		    }
+		});
+	});
+</script>
+
+</head>
+<body>
+</body>
+</html>
